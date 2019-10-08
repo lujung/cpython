@@ -53,7 +53,10 @@ frame_getvaluestack(PyFrameObject* f) {
     if (f->f_stacktop != NULL) {
         PyObject** p = NULL;
         for (p = f->f_valuestack; p < f->f_stacktop; p++) {
-            PyList_Append(lst, *p);
+			if (*p != NULL)
+				PyList_Append(lst, *p);
+			else
+				PyList_Append(lst, Py_None);
         }
     }
 
